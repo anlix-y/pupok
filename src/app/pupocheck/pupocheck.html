@@ -1,0 +1,62 @@
+<h2>Анкета (заполни все 10 полей)</h2>
+
+<form [formGroup]="regForm" (ngSubmit)="onSubmit()" novalidate>
+    <label>1. Логин:</label>
+    <input type="text" formControlName="login" placeholder="например alex">
+    @if (bad('login', 'required')) { <div class="error">Введите логин</div> }
+    @if (bad('login', 'minlength')) { <div class="error">Минимум 3 символа</div> }
+    @if (bad('login', 'adminForbidden')) { <div class="error">Слово "admin" запрещено!</div> }
+
+    <label>2. Email:</label>
+    <input type="email" formControlName="email" placeholder="name@mail.ru">
+    @if (bad('email', 'required')) { <div class="error">Введите почту</div> }
+    @if (bad('email', 'email')) { <div class="error">Неверный формат почты</div> }
+
+    <label>3. Пароль:</label>
+    <input type="password" formControlName="password" placeholder="минимум 6 символов">
+    @if (bad('password', 'required')) { <div class="error">Введите пароль</div> }
+    @if (bad('password', 'minlength')) { <div class="error">Минимум 6 символов</div> }
+    @if (bad('password', 'pattern')) { <div class="error">Нужны буквы и цифры</div> }
+
+    <label>4. Повторите пароль:</label>
+    <input type="password" formControlName="confirmPassword">
+    @if (bad('confirmPassword', 'required')) { <div class="error">Повторите пароль</div> }
+    @if (badForm('passwordsMismatch')) { <div class="error">Пароли не совпадают</div> }
+
+    <label>5. Имя:</label>
+    <input type="text" formControlName="name" placeholder="только буквы">
+    @if (bad('name', 'required')) { <div class="error">Введите имя</div> }
+    @if (bad('name', 'minlength')) { <div class="error">Минимум 2 символа</div> }
+    @if (bad('name', 'pattern')) { <div class="error">Только русские буквы</div> }
+
+    <label>6. Возраст:</label>
+    <input type="text" formControlName="age" placeholder="от 16 до 100">
+    @if (bad('age', 'required')) { <div class="error">Введите возраст</div> }
+    @if (bad('age', 'pattern')) { <div class="error">Только цифры</div> }
+    @if (bad('age', 'min')) { <div class="error">Минимум 16 лет</div> }
+    @if (bad('age', 'max')) { <div class="error">Максимум 100 лет</div> }
+
+    <label>7. Телефон:</label>
+    <input type="text" formControlName="phone" placeholder="+7 (999) 123-45-67">
+    @if (bad('phone', 'required')) { <div class="error">Введите телефон</div> }
+    @if (bad('phone', 'badPhone')) { <div class="error">Формат: +7 (999) 123-45-67</div> }
+
+    <label>8. Город:</label>
+    <input type="text" formControlName="city" placeholder="Москва / Санкт-Петербург / Казань">
+    @if (bad('city', 'required')) { <div class="error">Введите город</div> }
+    @if (bad('city', 'badCity')) { <div class="error">Только: Москва, Санкт-Петербург, Казань, Нижний Новгород</div> }
+
+    <label>9. Комментарий:</label>
+    <textarea formControlName="comment" placeholder="не больше 200 символов"></textarea>
+    <div class="hint">Символов: {{ regForm.get('comment')?.value?.length || 0 }}/200</div>
+    @if (bad('comment', 'maxlength')) { <div class="error">Максимум 200 символов</div> }
+    @if (bad('comment', 'profanity')) { <div class="error">Уберите грубые слова</div> }
+
+    <label class="check">
+        <input type="checkbox" formControlName="agree">
+        10. Согласен на обработку данных
+    </label>
+    @if (bad('agree', 'requiredTrue')) { <div class="error">Нужно поставить галочку</div> }
+
+    <button type="submit">Отправить на проверку</button>
+</form>

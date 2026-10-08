@@ -1,0 +1,59 @@
+h2 {
+    font-size: 22px;
+}
+
+form {
+    margin-top: 10px;
+    width: 320px;
+}
+
+label {
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+label.check {
+    font-weight: normal;
+    margin-top: 16px;
+}
+
+label.check input {
+    width: auto;
+}
+
+input,
+textarea {
+    display: block;
+    width: 100%;
+    margin-top: 4px;
+    padding: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+textarea {
+    height: 70px;
+}
+
+.error {
+    color: red;
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+.hint {
+    color: #888;
+    font-size: 12px;
+}
+
+button {
+    margin-top: 18px;
+    padding: 7px 14px;
+    font-size: 14px;
+}
+
+button:disabled {
+    color: #999;
+    cursor: not-allowed;
+}
